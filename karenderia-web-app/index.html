@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Karenderia Ultra Simple Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet"
+    />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#fce7f3", // Pastel Pink
+                        "text-main": "#1b0e14",
+                        "accent": "#ea539e", // Deeper pink for high contrast text
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            background-color: #ffffff;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="text-text-main min-h-screen">
+    <div class="max-w-[800px] mx-auto px-6 py-12">
+        <header class="mb-16">
+            <h1 class="text-3xl font-bold tracking-tight">Karenderia</h1>
+        </header>
+
+        <main class="space-y-16">
+
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a
+                    class="bg-primary hover:bg-pink-200 transition-colors py-6 text-center font-bold text-lg rounded-none"
+                    href="#"
+                >
+                    Menu
+                </a>
+
+                <a
+                    class="bg-primary hover:bg-pink-200 transition-colors py-6 text-center font-bold text-lg rounded-none"
+                    href="#"
+                >
+                    Order
+                </a>
+
+                <a
+                    class="bg-primary hover:bg-pink-200 transition-colors py-6 text-center font-bold text-lg rounded-none"
+                    href="#"
+                >
+                    Sales
+                </a>
+            </section>
+        </main>
+
+        <footer class="mt-32 pt-8 border-t border-primary/30">
+            <p class="text-xs font-bold uppercase tracking-widest text-gray-400">
+                © 2024 Karenderia
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
