@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Bare Essentials Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { "primary": "#f8b4d9", "primary-hover": "#f394c5" },
+                    fontFamily: { "sans": ["Plus Jakarta Sans", "sans-serif"] }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="flex justify-center p-8 sm:p-20 bg-white font-sans text-[#4a4a4a]">
+    <div class="w-full max-w-[600px] flex flex-col gap-12">
+        <header class="flex justify-between items-baseline">
+            <h1 class="text-xl font-semibold tracking-tight uppercase">Bare Essentials Menu</h1>
+            <span class="text-xs text-gray-400 font-medium tracking-widest uppercase">Karenderia</span>
+        </header>
+
+        <section>
+            <form id="menu-form" class="flex items-center gap-4 w-full border-b border-gray-100 pb-2">
+                <input id="item-name" required class="flex-1 border-none focus:ring-0 p-0 text-sm bg-transparent outline-none" placeholder="Item name" type="text"/>
+                <input id="item-price" required class="w-24 border-none focus:ring-0 p-0 text-sm bg-transparent text-right outline-none" placeholder="Price (₱)" type="number" step="0.01"/>
+                <button type="submit" class="bg-primary px-4 py-1 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-primary-hover">Add</button>
+            </form>
+        </section>
+
+        <main id="menu-list-container" class="flex flex-col gap-6"></main>
+
+        <footer class="pt-12 flex gap-8">
+            <a class="text-[10px] uppercase tracking-widest font-bold text-primary" href="menu.html">Menu</a>
+            <a class="text-[10px] uppercase tracking-widest font-bold text-gray-300 hover:text-primary" href="order.html">Orders</a>
+            <a class="text-[10px] uppercase tracking-widest font-bold text-gray-300 hover:text-primary" href="sales.html">Sales</a>
+        </footer>
+    </div>
+
+    <script>
+        // CRITICAL: This key MUST match in order.html
+        const DB_KEY = 'karenderia_master_menu';
+
+        const defaultItems = [
+            { id: 1, name: "Classic Burger", price: 250.00 },
+            { id: 2, name: "Cheese Pizza", price: 450.00 },
+            { id: 3, name: "Garden Salad", price: 180.00 },
+            { id: 4, name: "Pasta Carbonara", price: 320.00 }
+        ];
+
+        let currentMenu = JSON.parse(localStorage.getItem(DB_KEY));
+        if (!currentMenu || currentMenu.length === 0) {
+            currentMenu = defaultItems;
+            localStorage.setItem(DB_KEY, JSON.stringify(currentMenu));
+        }
+
+        function renderMenu() {
+            const container = document.getElementById('menu-list-container');
+            container.innerHTML = currentMenu.map(item => `
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-medium">${item.name}</span>
+                    <div class="flex items-center gap-6">
+                        <span class="text-sm font-semibold text-pink-400">₱${Number(item.price).toFixed(2)}</span>
+                        <button onclick="removeItem(${item.id})" class="text-gray-200 hover:text-red-400 transition-colors">
+                            <span class="material-symbols-outlined text-sm">close</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            localStorage.setItem(DB_KEY, JSON.stringify(currentMenu));
+        }
+
+        document.getElementById('menu-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            currentMenu.push({ id: Date.now(), name: document.getElementById('item-name').value, price: document.getElementById('item-price').value });
+            renderMenu(); e.target.reset();
+        });
+
+        window.removeItem = (id) => { currentMenu = currentMenu.filter(i => i.id !== id); renderMenu(); };
+        renderMenu();
+    </script>
+</body>
+</html>
