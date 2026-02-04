@@ -21,6 +21,6 @@ const DB_KEY = 'karenderia_master_menu';
             localStorage.setItem('karenderia_order_count', (parseInt(localStorage.getItem('karenderia_order_count')) || 0) + 1);
             alert("Order Complete!"); clearDraft();
         }
-
+ //dsadsadsa
         function clearDraft() { trayTotal = 0; trayCount = 0; updateUI(); }
         window.onload = loadMenu;
