@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Karenderia - Sales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-white font-display text-[#1b0e14] min-h-screen flex flex-col items-center justify-center p-4">
+    <main class="flex flex-col gap-12 text-center">
+        <div class="space-y-2">
+            <p class="text-[#964f73] text-sm font-bold uppercase tracking-widest">Total Sales</p>
+            <h1 id="sales-display" class="text-7xl font-black tracking-tight">₱0.00</h1>
+        </div>
+        <div class="space-y-2">
+            <p class="text-[#964f73] text-sm font-bold uppercase tracking-widest">Total Orders</p>
+            <h2 id="orders-display" class="text-7xl font-black tracking-tight">0</h2>
+        </div>
+        <div class="flex flex-col gap-4 mt-8">
+            <a href="order.html" class="text-sm font-bold text-[#e94999] uppercase tracking-widest">← Back to Orders</a>
+            <button onclick="localStorage.clear(); location.reload();" class="text-[10px] text-gray-300 uppercase tracking-widest hover:text-red-500">Reset Dashboard</button>
+        </div>
+    </main>
+    <script>
+        window.onload = () => {
+            const revenue = parseFloat(localStorage.getItem('karenderia_sales_total')) || 0;
+            const count = parseInt(localStorage.getItem('karenderia_order_count')) || 0;
+            document.getElementById('sales-display').innerText = `₱${revenue.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('orders-display').innerText = count;
+        };
+    </script>
+</body>
+</html>
